@@ -130,3 +130,29 @@ day_vis_demographics %>%
   facet_wrap(~social_grade)
 ```
 
+```{r}
+unique(scot_accom_occup$units)
+```
+```{r}
+scot_accom_occup %>%
+  select(-feature_code, -measurement, -units) %>%
+  filter(date_code == 2019) %>%
+  filter(weekday_weekend != "Weekday")
+
+```
+```{r}
+library(rtweet)
+library(reactable)
+library(httpuv)
+library(glue)
+library(purrr)
+```
+
+```{r}
+search_tweets("#visitscotland", n = 200, include_rts = FALSE)
+```
+
+```{r}
+search_tweets("#travelscotland", n = 200, include_rts = FALSE)
+```
+
