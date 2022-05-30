@@ -28,3 +28,105 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(plotly)
+```
+
+
+```{r}
+day_vis_activities %>%
+  select(-feature_code, -measurement) %>%
+  filter(date_code == 2019) %>%
+  filter(breakdown_of_domestic_tourism != 'Visits') %>%
+  filter(tourism_activity != "All") %>%
+  arrange(desc(value)) 
+```
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(age != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, age) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = age))+
+  geom_col(position = "dodge") +
+  facet_wrap(~age)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(marital_status != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, marital_status) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = marital_status))+
+  geom_col(position = "dodge") +
+  facet_wrap(~marital_status)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(gender != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, gender) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = gender))+
+  geom_col(position = "dodge") +
+  facet_wrap(~gender)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(employment_status != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, employment_status) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = employment_status))+
+  geom_col(position = "dodge") +
+  facet_wrap(~employment_status)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(children != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, children) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = children))+
+  geom_col(position = "dodge") +
+  facet_wrap(~children)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(access_to_car != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, access_to_car) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = access_to_car))+
+  geom_col(position = "dodge") +
+  facet_wrap(~access_to_car)
+```
+
+```{r}
+day_vis_demographics %>%
+  select(-feature_code, -measurement) %>%
+  filter(social_grade != "All") %>%
+  filter(breakdown_of_domestic_tourism != 'Expenditure') %>%
+  group_by(date_code, social_grade) %>%
+  summarise(n = sum(value)) %>%
+  ggplot(aes(x = date_code, y = n, fill = social_grade))+
+  geom_col(position = "dodge") +
+  facet_wrap(~social_grade)
+```
+
